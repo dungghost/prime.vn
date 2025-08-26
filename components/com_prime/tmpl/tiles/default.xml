@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_PRIME_TITLE_LIST_VIEW_TILES" option="View">
+        <message>
+                        <![CDATA[COM_PRIME_TITLE_LIST_VIEW_TILES_DESC]]>
+        </message>
+	</layout>
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+        <fieldset name="request">
+            <field
+                name="area"
+                query="SELECT `id`, `area` FROM #__prime_areas WHERE 1 ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="area"
+                label="COM_PRIME_FORM_LBL_TILE_AREA"
+                require="true"
+				multiple="true" 
+                description="COM_PRIME_FORM_DESC_TILE_AREA">
+            </field>
+			
+			<field
+                name="color"
+                query="SELECT `id`, `color` FROM #__prime_colors WHERE 1 ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="color"
+                label="COM_PRIME_FORM_LBL_TILE_COLOR"
+                require="true"
+				multiple="true" 
+                description="COM_PRIME_FORM_DESC_TILE_COLOR">
+            </field>
+			
+			<field
+                name="design"
+                query="SELECT `id`, `title` FROM #__prime_designs WHERE 1 ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="title"
+                label="COM_PRIME_FORM_LBL_TILE_DESIGN"
+                require="true"
+				multiple="true" 
+                description="COM_PRIME_FORM_DESC_TILE_DESIGN">
+            </field>
+			
+			<field
+                name="type"
+                query="SELECT `id`, `type` FROM #__prime_types WHERE 1 ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="type"
+                label="COM_PRIME_FORM_LBL_TILE_TYPE"
+                require="true"
+				multiple="true" 
+                description="COM_PRIME_FORM_DESC_TILE_TYPE">
+            </field>
+			
+			<field
+                name="size"
+                query="SELECT `id`, `size` FROM #__prime_sizes WHERE 1 ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="size"
+                label="COM_PRIME_FORM_LBL_TILE_SIZE"
+                require="true"
+				multiple="true" 
+                description="COM_PRIME_FORM_DESC_TILE_SIZE">
+            </field>
+			
+			<field
+                name="surface"
+                query="SELECT `id`, `surface` FROM #__prime_surfaces WHERE 1 ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="surface"
+                label="COM_PRIME_FORM_LBL_TILE_SURFACE"
+                require="true"
+				multiple="true" 
+                description="COM_PRIME_FORM_DESC_TILE_SURFACE">
+            </field>
+			
+			<field
+				name="list_layout"
+				type="list"
+				label="Layout"
+				class="form-select-color-state"
+				validate="options"
+				>
+				<option value="product">Product List</option>
+				<option value="search">Search List</option>
+			</field>
+			
+        </fieldset>
+		
+		
+    </fields>
+	
+</metadata>

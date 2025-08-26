@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field
+            name="search"
+            type="text"
+            hint="COM_PRIME_SEARCH_FILTER_SUBMIT"
+            label="COM_USERS_FILTER_SEARCH_DESC"
+            class="js-stools-search-string"
+        />
+        <field
+            name="area"
+            type="sql"
+            query="SELECT `id`, `area` FROM #__prime_areas ORDER BY `area`"
+            key_field="id"
+            value_field="area"
+            label="COM_PRIME_FORM_LBL_TILE_AREA"
+            onchange="this.form.submit();"
+            multiple="true"
+        />
+        <field
+            name="color"
+            type="sql"
+            query="SELECT `id`, `color` FROM #__prime_colors ORDER BY `color`"
+            key_field="id"
+            value_field="color"
+            label="COM_PRIME_FORM_LBL_TILE_COLOR"
+            onchange="this.form.submit();"
+            multiple="true"
+        />
+        <field
+            name="design"
+            type="sql"
+            query="SELECT `id`, `title` FROM #__prime_designs ORDER BY `title`"
+            key_field="id"
+            value_field="title"
+            label="COM_PRIME_FORM_LBL_TILE_DESIGN"
+            onchange="this.form.submit();"
+            multiple="true"
+        />
+        <field
+            name="type"
+            type="sql"
+            query="SELECT `id`, `type` FROM #__prime_types ORDER BY `type`"
+            key_field="id"
+            value_field="type"
+            label="COM_PRIME_FORM_LBL_TILE_TYPE"
+            onchange="this.form.submit();"
+            multiple="true"
+        />
+        <field
+            name="size"
+            type="sql"
+            query="SELECT `id`, `size` FROM #__prime_sizes ORDER BY `size`"
+            key_field="id"
+            value_field="size"
+            label="COM_PRIME_FORM_LBL_TILE_SIZE"
+            onchange="this.form.submit();"
+            multiple="true"
+        />
+        <field
+            name="surface"
+            type="sql"
+            query="SELECT `id`, `surface` FROM #__prime_surfaces ORDER BY `surface`"
+            key_field="id"
+            value_field="surface"
+            label="COM_PRIME_FORM_LBL_TILE_SURFACE"
+            onchange="this.form.submit();"
+            multiple="true"
+        />
+    </fields>
+    <fields name="list">
+        <field
+            name="fullordering"
+            type="list"
+            label="COM_PRIME_LIST_FULL_ORDERING"
+            description="COM_PRIME_LIST_FULL_ORDERING_DESC"
+            onchange="this.form.submit();"
+            default="a.id DESC"
+        >
+            <option value="">JGLOBAL_SORT_BY</option>
+            <option value="a.id ASC">COM_PRIME_ID_ASC</option>
+            <option value="a.id DESC">COM_PRIME_ID_DESC</option>
+            <option value="a.state ASC">COM_PRIME_STATE_ASC</option>
+            <option value="a.state DESC">COM_PRIME_STATE_DESC</option>
+            <option value="a.sku ASC">COM_PRIME_SKU_ASC</option>
+            <option value="a.sku DESC">COM_PRIME_SKU_DESC</option>
+        </field>
+        <field
+            name="limit"
+            type="limitbox"
+            class="input-mini"
+            default="25"
+            label="COM_PRIME_LIST_LIMIT"
+            description="COM_PRIME_LIST_LIMIT_DESC"
+            onchange="this.form.submit();"
+        />
+    </fields>
+</form>

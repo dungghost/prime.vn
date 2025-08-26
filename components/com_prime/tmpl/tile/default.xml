@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_PRIME_TITLE_ITEM_VIEW_TILE" option="View">
+        <message>
+                        <![CDATA[COM_PRIME_TITLE_ITEM_VIEW_TILE_DESC]]>
+        </message>
+    </layout>
+    <fields name="request">
+        <fieldset 
+            name="request"
+            label="COM_PRIME_FIELDSET_ITEM_ID_SELECT_LABEL">
+            <field
+                name="id"
+                query="SELECT `id`, `sku` FROM #__prime_tiles ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="sku"
+                label="COM_PRIME_ITEM_ID_SELECT_LABEL"
+                require="true"
+                description="JGLOBAL_SHOW_TITLE_DESC">
+            </field>
+        </fieldset>
+    </fields>
+</metadata>
