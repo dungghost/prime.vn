@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "mod_prime_sku_search",
+  "version": "1.0.0",
+  "description": "Assets for Prime SKU Search Module",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "mod_prime_sku_search.styles",
+      "type": "style",
+      "uri": "mod_prime_sku_search/assets/css/mod_prime_sku_search.css",
+      "dependencies": [],
+      "attributes": {},
+      "version": "1.0.0"
+    }
+  ]
+}

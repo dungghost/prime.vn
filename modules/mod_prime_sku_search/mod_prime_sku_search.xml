@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_PRIME_SKU_SEARCH_TITLE</name>
+    <creationDate>2025-08-20</creationDate>
+    <author>OneDigital</author>
+    <authorEmail>hello@onedigital.vn</authorEmail>
+    <authorUrl>https://onedigital.vn</authorUrl>
+    <copyright>Copyright (C) 2025 OneDigital. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later;</license>
+    <version>1.0.0</version>
+    <description><![CDATA[MOD_PRIME_SKU_SEARCH_XML_DESCRIPTION]]></description>
+    <namespace path="src">Vendor\Module\PrimeSkuSearch</namespace>
+    <files>
+        <filename module="mod_prime_sku_search">mod_prime_sku_search.php</filename>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+        <folder>services</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="moduleclass_sfx"
+                    type="text"
+                    label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                    description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

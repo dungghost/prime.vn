@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_PRIME_TILE_SEARCH_TITLE</name>
+    <creationDate>2024-12-28</creationDate>
+    <author>OneDigital</author>
+    <authorEmail>hello@onedigital.vn</authorEmail>
+    <authorUrl>https://onedigital.vn</authorUrl>
+    <copyright>Copyright (C) 2024 OneDigital. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later;</license>
+    <version>1.0.0</version>
+    <description><![CDATA[MOD_PRIME_TILE_SEARCH_XML_DESCRIPTION]]></description>
+    <namespace path="src">Vendor\Module\PrimeTileSearch</namespace>
+    <files>
+        <folder module="mod_prime_tile_search">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+        <file>mod_prime_tile_search.xml</file>
+    </files>
+    
+    <media destination="mod_prime_tile_search" folder="media">
+        <filename>css/mod_prime_tile_search.css</filename>
+        <filename>js/mod_prime_tile_search.js</filename>
+    </media>
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_prime_tile_search.ini</language>
+        <language tag="en-GB">language/en-GB/mod_prime_tile_search.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldprefix="Vendor\Module\PrimeTileSearch\Site\Field">
+        <field
+            name="moduleclass_sfx"
+            type="text"
+            label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+            description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+        />
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

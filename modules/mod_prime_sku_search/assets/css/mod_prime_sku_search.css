@@ -1,0 +1,24 @@
+/* Styles for the new Clear button */
+.mod_prime_sku_search .btn-clear-sku {
+    border-radius: 0;
+    border-left: none; /* Remove left border to merge with input */
+    background-color: #fff;
+    color: #888;
+    height: calc(2.25rem + 2px);
+    border-color: #ced4da;
+}
+
+.mod_prime_sku_search .btn-clear-sku:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+/* Adjust search button's border radius when clear button is present */
+.mod_prime_sku_search .btn-clear-sku + .input-group-btn .btn-sku-search {
+    border-radius: 0 5px 5px 0;
+}
+
+/* Adjust input border radius when clear button is NOT present */
+.mod_prime_sku_search .input-group-btn:last-child .btn-sku-search {
+     border-radius: 0 5px 5px 0;
+}
