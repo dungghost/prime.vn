@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="filter">
+        <field name="search" type="text" description="COM_PRIME_SEARCH_FILTER_SUBMIT"
+               label="COM_USERS_FILTER_SEARCH_DESC"
+               class="js-stools-search-string" />
+        <field name="state"
+							type="status"
+							label="COM_PRIME_FILTER_STATE"
+							description="COM_PRIME_FILTER_STATE_DESC"
+							onchange="this.form.submit();">
+							<option value="">JOPTION_SELECT_PUBLISHED</option>
+						</field>
+        <field name="brand" type="sql" label="COM_PRIME_FORM_LBL_TILE_BRAND" query="SELECT `id` AS `id`, `brand` AS val FROM `#__prime_brands`" header="COM_PRIME_TILES_BRAND_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="language" label="COM_PRIME_FORM_LBL_TILE_LANGUAGE" type="contentlanguage" onchange="this.form.submit();">
+  <option value="">JOPTION_SELECT_LANGUAGE</option>
+</field>
+<field name="design" type="sql" label="COM_PRIME_FORM_LBL_TILE_DESIGN" query="SELECT `id` AS `id`, `title` AS val FROM `#__prime_designs`" header="COM_PRIME_TILES_DESIGN_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="thickness" type="sql" label="COM_PRIME_FORM_LBL_TILE_THICKNESS" query="SELECT `id` AS `id`, `thickness` AS val FROM `#__prime_thickness`" header="COM_PRIME_TILES_THICKNESS_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="size" type="sql" label="COM_PRIME_FORM_LBL_TILE_SIZE" query="SELECT `id` AS `id`, `size` AS val FROM `#__prime_sizes`" header="COM_PRIME_TILES_SIZE_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+
+
+    </fields>
+
+    <fields name="list">
+
+        <field name="fullordering"
+               type="list"
+               label="COM_PRIME_LIST_FULL_ORDERING"
+               description="COM_PRIME_LIST_FULL_ORDERING_DESC"
+               onchange="this.form.submit();"
+               default="a.id DESC"
+        >
+            <option value="">JGLOBAL_SORT_BY</option>
+            <option value="a.id ASC">COM_PRIME_ID_ASC</option><option value="a.id DESC">COM_PRIME_ID_DESC</option><option value="a.state ASC">COM_PRIME_STATE_ASC</option><option value="a.state DESC">COM_PRIME_STATE_DESC</option><option value="a.sku ASC">COM_PRIME_SKU_ASC</option><option value="a.sku DESC">COM_PRIME_SKU_DESC</option><option value="a.brand ASC">COM_PRIME_BRAND_ASC</option><option value="a.brand DESC">COM_PRIME_BRAND_DESC</option><option value="a.language ASC">COM_PRIME_LANGUAGE_ASC</option><option value="a.language DESC">COM_PRIME_LANGUAGE_DESC</option><option value="a.design ASC">COM_PRIME_DESIGN_ASC</option><option value="a.design DESC">COM_PRIME_DESIGN_DESC</option><option value="a.thickness ASC">COM_PRIME_THICKNESS_ASC</option><option value="a.thickness DESC">COM_PRIME_THICKNESS_DESC</option><option value="a.area ASC">COM_PRIME_AREA_ASC</option><option value="a.area DESC">COM_PRIME_AREA_DESC</option><option value="a.color ASC">COM_PRIME_COLOR_ASC</option><option value="a.color DESC">COM_PRIME_COLOR_DESC</option><option value="a.type ASC">COM_PRIME_TYPE_ASC</option><option value="a.type DESC">COM_PRIME_TYPE_DESC</option><option value="a.size ASC">COM_PRIME_SIZE_ASC</option><option value="a.size DESC">COM_PRIME_SIZE_DESC</option>
+
+        </field>
+
+       <field name="limit"
+               type="limitbox"
+               label="COM_PRIME_LIST_LIMIT"
+               description="COM_PRIME_LIST_LIMIT_DESC"
+               class="input-mini"
+               default="25"
+               onchange="this.form.submit();"
+        />
+
+    </fields>
+
+</form>

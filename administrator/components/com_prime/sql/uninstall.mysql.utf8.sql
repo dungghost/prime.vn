@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS `#__prime_tiles`;
+DROP TABLE IF EXISTS `#__prime_areas`;
+DROP TABLE IF EXISTS `#__prime_brands`;
+DROP TABLE IF EXISTS `#__prime_colors`;
+DROP TABLE IF EXISTS `#__prime_variation_colors`;
+DROP TABLE IF EXISTS `#__prime_designs`;
+DROP TABLE IF EXISTS `#__prime_effects`;
+DROP TABLE IF EXISTS `#__prime_faces`;
+DROP TABLE IF EXISTS `#__prime_groutcolors`;
+DROP TABLE IF EXISTS `#__prime_sizes`;
+DROP TABLE IF EXISTS `#__prime_group_size`;
+DROP TABLE IF EXISTS `#__prime_surfaces`;
+DROP TABLE IF EXISTS `#__prime_thickness`;
+DROP TABLE IF EXISTS `#__prime_types`;
