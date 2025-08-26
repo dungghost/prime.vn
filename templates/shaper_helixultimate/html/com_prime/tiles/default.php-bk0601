@@ -1,0 +1,107 @@
+<?php
+/**
+ * @version    CVS: 1.0.0
+ * @package    Com_Prime
+ * @author     OneDigital <hello@onedigital.vn>
+ * @copyright  @2025 PRIME GROUP
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+// No direct access
+defined('_JEXEC') or die;
+
+use \Joomla\CMS\HTML\HTMLHelper;
+use \Joomla\CMS\Factory;
+use \Joomla\CMS\Uri\Uri;
+use \Joomla\CMS\Router\Route;
+use \Joomla\CMS\Language\Text;
+use \Joomla\CMS\Layout\LayoutHelper;
+use \Joomla\CMS\Session\Session;
+use \Joomla\CMS\User\UserFactoryInterface;
+
+HTMLHelper::_('bootstrap.tooltip');
+HTMLHelper::_('behavior.multiselect');
+HTMLHelper::_('formbehavior.chosen', 'select');
+
+$user       = Factory::getApplication()->getIdentity();
+$userId     = $user->get('id');
+$listOrder  = $this->state->get('list.ordering');
+$listDirn   = $this->state->get('list.direction');
+$canCreate  = $user->authorise('core.create', 'com_prime') && file_exists(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'tileform.xml');
+$canEdit    = $user->authorise('core.edit', 'com_prime') && file_exists(JPATH_COMPONENT .  DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'tileform.xml');
+$canCheckin = $user->authorise('core.manage', 'com_prime');
+$canChange  = $user->authorise('core.edit.state', 'com_prime');
+$canDelete  = $user->authorise('core.delete', 'com_prime');
+
+// Import CSS
+$wa = $this->document->getWebAssetManager();
+$wa->useStyle('com_prime.list');
+?>
+
+<?php if ($this->params->get('show_page_heading')) : ?>
+    <div class="page-header">
+        <h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
+    </div>
+<?php endif;?>
+<form action="<?php echo htmlspecialchars(Uri::getInstance()->toString()); ?>" method="post"
+	  name="adminForm" id="adminForm">
+	<?php if(!empty($this->filterForm)) { echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); } ?>
+	<div class="wrapper-product-list">
+		<?php foreach ($this->items as $i => $item) : ?>
+			<?php $canEdit = $user->authorise('core.edit', 'com_prime'); ?>
+			<div class="item-product">
+				<?php $canCheckin = Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_prime.' . $item->id) || $item->checked_out == Factory::getApplication()->getIdentity()->id; ?>
+				<?php if($canCheckin && $item->checked_out > 0) : ?>
+					<a href="<?php echo Route::_('index.php?option=com_prime&task=tile.checkin&id=' . $item->id .'&'. Session::getFormToken() .'=1'); ?>">
+						<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'tile.', false); ?>
+					</a>
+				<?php endif; ?>
+					<a class="wrap-item-product" href="<?php echo Route::_('index.php?option=com_prime&view=tile&id='.(int) $item->id); ?>">
+						<img class="product-image" src="<?php echo $item->image; ?>" />
+						<div class="product-info">
+							<div class="product-type">
+								<span clas="product-type__color"><?php echo $item->color; ?></span>
+								-
+								<span clas="product-type__size"><?php echo $item->size; ?></span>
+							</div>
+							<div class="product-sku">
+								<?php echo $this->escape($item->sku); ?>
+							</div>
+						</div>
+					</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<div class="pagination">
+		<?php echo $this->pagination->getPagesLinks(); ?>
+	</div>
+	
+	<?php if ($canCreate) : ?>
+		<a href="<?php echo Route::_('index.php?option=com_prime&task=tileform.edit&id=0', false, 0); ?>"
+		   class="btn btn-success btn-small"><i
+				class="icon-plus"></i>
+			<?php echo Text::_('COM_PRIME_ADD_ITEM'); ?></a>
+	<?php endif; ?>
+
+	<input type="hidden" name="task" value=""/>
+	<input type="hidden" name="boxchecked" value="0"/>
+	<input type="hidden" name="filter_order" value=""/>
+	<input type="hidden" name="filter_order_Dir" value=""/>
+	<?php echo HTMLHelper::_('form.token'); ?>
+</form>
+
+<?php
+	if($canDelete) {
+		$wa->addInlineScript("
+			jQuery(document).ready(function () {
+				jQuery('.delete-button').click(deleteItem);
+			});
+
+			function deleteItem() {
+
+				if (!confirm(\"" . Text::_('COM_PRIME_DELETE_MESSAGE') . "\")) {
+					return false;
+				}
+			}
+		", [], [], ["jquery"]);
+	}
+?>
