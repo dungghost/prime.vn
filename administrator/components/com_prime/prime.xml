@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="4.0" method="upgrade">
+    <name>com_prime</name>
+    <creationDate>2024-12-30</creationDate>
+    <copyright>@2025 PRIME GROUP</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>OneDigital</author>
+    <authorEmail>hello@onedigital.vn</authorEmail>
+    <authorUrl>https://onedigital.vn</authorUrl>
+    <version>CVS: 1.0.0</version>
+    <description>Prime Group</description>
+    <namespace path="src">Prime\Component\Prime</namespace>
+    
+    <scriptfile>script.php</scriptfile>
+    
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <update> <!-- Runs on update -->
+        <schemas>
+            <schemapath type="mysql">sql/updates</schemapath>
+        </schemas>
+    </update>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    
+
+    <files folder="site">
+        <folder>src</folder>
+        <folder>forms</folder>
+        <folder>tmpl</folder>
+    </files>
+    <media destination="com_prime" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+        <filename>joomla.asset.json</filename>
+    </media>
+    <languages folder="site/languages">
+        
+			<language tag="en-US">en-US/com_prime.ini</language>
+			<language tag="vi-VN">vi-VN/com_prime.ini</language>
+    </languages>
+    <administration>
+        <menu>COM_PRIME</menu>
+        <submenu>
+            
+			<menu link="option=com_prime&amp;view=tiles" view="tiles" alt="Prime/Tiles">COM_PRIME_TITLE_TILES</menu>
+
+			<menu link="option=com_prime&amp;view=areas" view="areas" alt="Prime/Areas">COM_PRIME_TITLE_AREAS</menu>
+
+			<menu link="option=com_prime&amp;view=brands" view="brands" alt="Prime/Brands">COM_PRIME_TITLE_BRANDS</menu>
+
+			<menu link="option=com_prime&amp;view=colors" view="colors" alt="Prime/Colors">COM_PRIME_TITLE_COLORS</menu>
+
+			<menu link="option=com_prime&amp;view=variationcolors" view="variationcolors" alt="Prime/Variationcolors">COM_PRIME_TITLE_VARIATIONCOLORS</menu>
+
+			<menu link="option=com_prime&amp;view=designs" view="designs" alt="Prime/Designs">COM_PRIME_TITLE_DESIGNS</menu>
+
+			<menu link="option=com_prime&amp;view=effects" view="effects" alt="Prime/Effects">COM_PRIME_TITLE_EFFECTS</menu>
+
+			<menu link="option=com_prime&amp;view=faces" view="faces" alt="Prime/Faces">COM_PRIME_TITLE_FACES</menu>
+
+			<menu link="option=com_prime&amp;view=groutcolors" view="groutcolors" alt="Prime/Groutcolors">COM_PRIME_TITLE_GROUTCOLORS</menu>
+
+			<menu link="option=com_prime&amp;view=sizes" view="sizes" alt="Prime/Sizes">COM_PRIME_TITLE_SIZES</menu>
+
+			<menu link="option=com_prime&amp;view=groupsizes" view="groupsizes" alt="Prime/Groupsizes">COM_PRIME_TITLE_GROUPSIZES</menu>
+
+			<menu link="option=com_prime&amp;view=surfaces" view="surfaces" alt="Prime/Surfaces">COM_PRIME_TITLE_SURFACES</menu>
+
+			<menu link="option=com_prime&amp;view=thicknesses" view="thicknesses" alt="Prime/Thicknesses">COM_PRIME_TITLE_THICKNESSES</menu>
+
+			<menu link="option=com_prime&amp;view=types" view="types" alt="Prime/Types">COM_PRIME_TITLE_TYPES</menu>
+
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>services</folder>
+            <folder>presets</folder>
+            <folder>sql</folder>
+        </files>
+        <languages folder="administrator/languages">
+            
+			<language tag="en-US">en-US/com_prime.ini</language>
+			<language tag="en-US">en-US/com_prime.sys.ini</language>
+			<language tag="vi-VN">vi-VN/com_prime.ini</language>
+			<language tag="vi-VN">vi-VN/com_prime.sys.ini</language>
+        </languages>
+    </administration>
+    <config>
+        <fields name="params">
+            <fieldset name="component">
+                <field name="save_history" default="0" />
+            </fieldset>
+        </fields>
+    </config>
+    <plugins>
+		<plugin group="finder" plugin="primetiles"/>
+    </plugins>
+    
+
+    <updateservers>
+        <server type="extension" priority="1" name="com_prime">https://nocdn.component-creator.com/index.php?task=builder.preupdatecheckhook&amp;option=com_combuilder&amp;component=NTgzOTMtMjEzODI3</server>
+    </updateservers>
+</extension>
+<!-- Component built by the Joomla Component Creator -->
+<!-- http://www.component-creator.com/ -->
