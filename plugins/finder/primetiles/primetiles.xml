@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.0" type="plugin" group="finder">
+    <name>plg_finder_primetiles</name>
+    <author>OneDigital</author>
+    <creationDate>2024-12-30</creationDate>
+    <copyright>@2025 PRIME GROUP</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>hello@onedigital.vn</authorEmail>
+    <authorUrl>https://onedigital.vn</authorUrl>
+    <version>CVS: 1.0.0</version>
+    <description>PLG_FINDER_COM_PRIME_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="primetiles">primetiles.php</filename>
+        <filename>index.html</filename>
+    </files>
+    <languages folder="languages">
+        
+			<language tag="en-US">en-US/plg_finder_primetiles.ini</language>
+			<language tag="en-US">en-US/plg_finder_primetiles.sys.ini</language>
+			<language tag="vi-VN">vi-VN/plg_finder_primetiles.ini</language>
+			<language tag="vi-VN">vi-VN/plg_finder_primetiles.sys.ini</language>
+    </languages>
+    <config>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="com_prime">https://www.component-creator.com/index.php?task=builder.preupdatecheckhook&amp;option=com_combuilder&amp;component=NTgzOTMtMjEzODI3</server>
+    </updateservers>
+</extension>
