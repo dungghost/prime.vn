@@ -59,7 +59,6 @@ class TilesModel extends ListModel
 
 		parent::__construct($config);
 
-        // *** FIX: Create a language-specific context for the filters ***
         $this->context = $this->context . '.' . Factory::getApplication()->getLanguage()->getTag();
 	}
 
@@ -75,33 +74,43 @@ class TilesModel extends ListModel
 		$app   = Factory::getApplication();
 		$input = $app->input;
 
+		// Xử lý các trạng thái phân trang và sắp xếp cơ bản trước.
+		// Quan trọng: Bước này lấy giá trị 'start' từ URL khi phân trang.
 		parent::populateState('a.id', 'ASC');
+
+		$currentItemid = $input->getInt('Itemid');
+		$sessionItemid = $app->getUserState($this->context . '.itemid');
 
 		$submittedFilters = $input->get('filter', null, 'array');
 		$isFilterSubmission = ($submittedFilters !== null);
 
-		if ($isFilterSubmission) {
-			$filters = $submittedFilters;
-			$app->setUserState($this->context . '.filter', $filters);
+		if ($currentItemid != $sessionItemid) {
+			// TRƯỜNG HỢP 1: Người dùng đã chuyển sang một menu item MỚI.
+			// Hành động: Hủy bỏ tất cả các bộ lọc cũ và CHỈ sử dụng bộ lọc từ menu item mới.
+			$menuParams = $app->getParams();
+			$filters = (array) $menuParams->get('filter', []);
+			$this->setState('list.start', 0);
+
+		} elseif ($isFilterSubmission) {
+			// TRƯỜNG HỢP 2: Người dùng đang ở cùng một menu item nhưng đã gửi một bộ lọc MỚI.
+			// Hành động: Kết hợp các bộ lọc cơ bản từ menu với các bộ lọc do người dùng gửi lên.
+			$menuParams = $app->getParams();
+			$filters = (array) $menuParams->get('filter', []);
+			$filters = array_merge($filters, $submittedFilters);
+			$this->setState('list.start', 0);
+
 		} else {
+			// TRƯỜNG HỢP 3: Người dùng ở cùng một menu item và không gửi bộ lọc mới.
+			// Điều này có nghĩa là họ đang phân trang hoặc chỉ tải lại trang.
+			// Hành động: Sử dụng bộ lọc hoàn chỉnh đã được lưu trong session từ hành động cuối cùng.
 			$filters = (array) $app->getUserState($this->context . '.filter', []);
 		}
 
-        if ($input->getMethod() === 'GET' && !$isFilterSubmission) {
-			$legacyApplied = false;
-			$legacyNames = ['area', 'color', 'design', 'type', 'size', 'surface'];
-			foreach ($legacyNames as $name) {
-				$value = $input->get($name, null, 'array');
-				if ($value !== null) {
-					$filters[$name] = $value;
-					$legacyApplied = true;
-				}
-			}
-			if ($legacyApplied) {
-				$app->setUserState($this->context . '.filter', $filters);
-			}
-		}
+		// Bây giờ, lưu trạng thái cuối cùng cho request này vào session để phục vụ cho request tiếp theo (ví dụ: phân trang).
+		$app->setUserState($this->context . '.filter', $filters);
+		$app->setUserState($this->context . '.itemid', $currentItemid);
 
+		// Cuối cùng, thiết lập trạng thái để model sử dụng khi xây dựng truy vấn cho lần tải trang hiện tại.
 		$this->setState('filter', $filters);
 		$this->setState('filter.search', (string) ($filters['search'] ?? ''));
 		$this->setState('filter.area', (array) ($filters['area'] ?? []));
