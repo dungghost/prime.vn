@@ -17,24 +17,25 @@ use Joomla\CMS\Uri\Uri;
 /** @var Joomla\Registry\Registry $params */
 /** @var stdClass $module */
 
-// Lấy các đối tượng cần thiết từ Joomla Factory
 $app = Factory::getApplication();
 $doc = Factory::getDocument();
 
-// Tải file CSS của module một cách an toàn
 $doc->addStyleSheet(Uri::base(true) . '/modules/mod_prime_sku_search/assets/css/mod_prime_sku_search.css');
-HTMLHelper::_('bootstrap.tooltip'); // Tải thư viện Bootstrap cần thiết
+HTMLHelper::_('bootstrap.tooltip');
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
 
-// *** FIX: Đọc giá trị tìm kiếm từ session CỦA NGÔN NGỮ HIỆN TẠI ***
+// Lấy giá trị tìm kiếm từ session
 $langContext = 'com_prime.tiles.' . $app->getLanguage()->getTag();
 $filters = (array) $app->getUserState($langContext . '.filter', []);
 $searchValue = $filters['search'] ?? '';
 
-// Xây dựng URL action cho form
-$activeMenuItem = $app->getMenu()->getActive();
-$itemId = $activeMenuItem ? $activeMenuItem->id : null;
+// Tìm Itemid dành riêng cho trang sản phẩm để đảm bảo URL và phân trang chính xác
+$menu = $app->getMenu();
+$menuItem = $menu->getItems('link', 'index.php?option=com_prime&view=tiles', true);
+$itemId = $menuItem ? $menuItem->id : null;
+
+// Xây dựng URL action cho form, sử dụng Itemid đã tìm thấy nếu có
 $formAction = Route::_('index.php?option=com_prime&view=tiles' . ($itemId ? '&Itemid=' . $itemId : ''));
 
 ?>
@@ -43,7 +44,7 @@ $formAction = Route::_('index.php?option=com_prime&view=tiles' . ($itemId ? '&It
     <?php if ($module->showtitle) : ?>
         <h3 class="page-header"><?php echo $module->title; ?></h3>
     <?php endif; ?>
-    <form id="prime-sku-search-form-<?php echo $module->id; ?>" action="<?php echo $formAction; ?>" method="post">
+    <form id="prime-sku-search-form-<?php echo $module->id; ?>" action="<?php echo $formAction; ?>" method="get">
         <div class="input-group">
             <label for="sku_search_input-<?php echo $module->id; ?>" class="visually-hidden"><?php echo Text::_('MOD_PRIME_SKU_SEARCH_LABEL'); ?></label>
             <input type="text" name="filter[search]" id="sku_search_input-<?php echo $module->id; ?>" class="form-control" value="<?php echo htmlspecialchars($searchValue, ENT_COMPAT, 'UTF-8'); ?>" placeholder="<?php echo Text::_('MOD_PRIME_SKU_SEARCH_LABEL'); ?>">
@@ -66,7 +67,7 @@ $formAction = Route::_('index.php?option=com_prime&view=tiles' . ($itemId ? '&It
 </div>
 
 <?php
-// Thêm JavaScript vào cuối trang một cách an toàn
+// Thêm JavaScript để xóa ô tìm kiếm
 $script = "
 document.addEventListener('DOMContentLoaded', function() {
     var clearButton = document.getElementById('btn-clear-sku-search-{$module->id}');
